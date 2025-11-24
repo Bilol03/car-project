@@ -1,4 +1,5 @@
 const { writeFile, readFile } = require('../utils/fs.js')
+let cars = readFile('./cars.json')
 
 function getCar(req, res) {
 	let data = readFile('./cars.json')
@@ -21,22 +22,35 @@ function postCar(req, res) {
 			message: 'User not found in this id',
 		})
 
-	let cars = readFile('./cars.json')
 	let newCar = {
-        id: cars[cars.length - 1] ? cars[cars.length - 1].id + 1 : 1,
+		id: cars[cars.length - 1] ? cars[cars.length - 1].id + 1 : 1,
 		model,
 		color,
 		raqam,
 		userId,
 	}
-    cars.push(newCar)
-    const message = writeFile("./cars.json", cars)
-    return res.json({
-        message,
-        newCar
+	cars.push(newCar)
+	const message = writeFile('./cars.json', cars)
+	return res.json({
+		message,
+		newCar,
+	})
+}
+
+function getCarById(req, res) {
+	const id = +req.params.id
+    let car = cars.find(el => el.id == id)
+    if (!car) return res.json({
+        message: "Car not found"
+    })
+
+    res.json({
+        message: "Success",
+        car
     })
 }
 module.exports = {
 	getCar,
 	postCar,
+	getCarById,
 }
