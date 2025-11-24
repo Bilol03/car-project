@@ -1,0 +1,16 @@
+[
+	{
+		"id": 1,
+		"model": "BMW x7",
+		"color": "red",
+		"raqam": "10 P 220 LT",
+		"userId": 1
+	},
+	{
+		"id": 2,
+		"model": "Jigule",
+		"color": "Ko'k",
+		"raqam": "10 P 220 LT",
+		"userId": 1
+	}
+]
